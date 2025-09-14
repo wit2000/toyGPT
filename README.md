@@ -73,6 +73,18 @@ Dataset size: 245k–1M characters tested; larger dataset improves contextual un
 
 Character-level model generates more coherent English structure but slower convergence.
 
+7. Run the training:
+
+conda activate llm   # or your Python environment
+python train_toy_gpt.py
+
+
+After training, the model will be saved as model_word.pth.
+
+Use your interactive script (chat_toy_gpt_word.py) to chat with the model:
+
+python chat_toy_gpt_word.py
+
 Word-level model requires building vocab from words, not characters.
 
 Output improves with larger model parameters, more iterations, and larger context (block_size).
