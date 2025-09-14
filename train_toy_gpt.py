@@ -6,9 +6,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import math
+import pickle
+import random
 
 # 1. Load dataset
-with open("C:/Users/c08/alderamin_v1-3.txt", encoding="utf-8") as f:
+with open("C:/Users/c08/mini_gpt_dialogue.txt ", encoding="utf-8") as f:
     text = f.read()
 
 # #Model learn with char-level
@@ -45,7 +47,7 @@ train_data = data[:n]
 val_data = data[n:]
 
 # Hyperparameters
-block_size = 512     # can “see” longer context
+block_size = 128     # can “see” longer context
 batch_size = 32
 n_embd = 512        # larger embeddings
 n_head = 8
@@ -57,6 +59,23 @@ grad_clip = 1.0       # Gradient clipping to stabilize training
 dropout = 0.1         # Optional: helps prevent overfitting
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 torch.manual_seed(1337)
+
+words = text.split()  # split by whitespace
+vocab = sorted(set(words))
+stoi = {w:i for i,w in enumerate(vocab)}
+itos = {i:w for w,i in stoi.items()}
+vocab_size = len(vocab)
+
+# 2. Build word-level vocab
+words = text.split()  # split by whitespace
+vocab = sorted(set(words))
+stoi = {w:i for i,w in enumerate(vocab)}
+itos = {i:w for w,i in stoi.items()}
+vocab_size = len(vocab)
+
+# Save vocab
+with open("vocab_word.pkl", "wb") as f:
+    pickle.dump(vocab, f)
 
 # 3. Data loader
 def get_batch(split):
@@ -184,6 +203,9 @@ for iter in range(max_iters):
     optimizer.zero_grad(set_to_none=True)
     loss.backward()
     optimizer.step()
+
+    # <-- save the model here after training
+    torch.save(model.state_dict(), "model_word.pth")
 
 # 7. Generate some text
 context = torch.zeros((1,1), dtype=torch.long, device=device)
