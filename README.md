@@ -1,3 +1,5 @@
+Experimental: Still not able to make model understand language and talk like normal chatbot, but at least able to give output when talk to, based on the learned words.
+
 1. Environment Setup
 
 Create a Conda environment:
