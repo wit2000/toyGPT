@@ -1,5 +1,6 @@
-Experimental: Still not able to make model understand language and talk like normal chatbot, but at least able to give output when talk to, based on the learned words.
+Experimental: For Self train model, it is still not able to make model understand language and talk like normal chatbot, but at least able to give output when talk to, based on the learned words.
 
+Self Train:
 1. Environment Setup
 
 Create a Conda environment:
@@ -90,3 +91,43 @@ python chat_toy_gpt_word.py
 Word-level model requires building vocab from words, not characters.
 
 Output improves with larger model parameters, more iterations, and larger context (block_size).
+
+Pre-trained (Hugging face model)
+
+# Mistral-7B Local Setup
+
+This repository contains instructions and scripts to set up and run the Mistral-7B-Instruct model locally on Windows with GPU support (CUDA).
+
+## Features
+- Load Mistral-7B-Instruct-v0.3
+- Simple chat interface
+- Optional context memory
+- GPU support
+
+## Requirements
+- Windows 10/11 or Linux
+- Python 3.10+
+- At least 16GB GPU memory recommended
+- ~40GB free disk space
+
+# Mistral-7B Setup Instructions
+
+## 1. Create Python Environment
+```bash
+conda create -n llm python=3.10
+conda activate llm
+
+pip install -r requirements.txt
+huggingface-cli login
+
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+Notes: Ensure torch.cuda.is_available() returns True. Else it will use CPU and won't be fast to response.
+
+Run Model:
+python scripts/test_model.py
+
+
+
+
+
