@@ -8,6 +8,17 @@ Experimental: This self-trained model is primarily for learning purposes. It cur
 - Interactive chat interface after training
 - Customizable hyperparameters
 
+## Requirements
+Windows 10/11 or Linux
+Python 3.10+
+At least 16GB GPU memory recommended
+
+Hardware & CUDA Notes
+
+GPU Used: NVIDIA GeForce RTX 5070ti (16GB VRAM)
+
+CUDA Toolkit Installed: CUDA 12.8 (PyTorch build with cu128) as it support my GPU, refer to official notes to check which CUDA Toolkit is supported by your GPU.
+
 # Environment Setup
 
 Create a Conda environment:
